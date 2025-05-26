@@ -1,0 +1,23 @@
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.menu-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+.tag {
+  background: #f0f0f0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-right: 5px;
+  font-size: 0.8em;
+}
