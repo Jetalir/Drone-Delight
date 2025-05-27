@@ -1,10 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext.jsx';
+import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
 import Menu from './pages/Menu.jsx';
 import Cart from './pages/Cart.jsx';
-import Layout from './components/Layout.jsx';
 import Checkout from './pages/Checkout.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
 import NotFound from "./pages/NotFound.jsx";
 import "./App.css";
 
@@ -19,6 +21,8 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

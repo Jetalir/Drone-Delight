@@ -21,3 +21,18 @@
   margin-right: 5px;
   font-size: 0.8em;
 }
+.addToCart {
+  margin-top: 20px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid;
+  font-size: 40px;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}

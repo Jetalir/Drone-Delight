@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiMenu, FiUser, FiShoppingCart } from "react-icons/fi";
 import "../styles/Navbar.css"; 
-import Logo from '../assets/Logo.png';
+import Logo from '../images/Logo.png';
 
 function Navbar({ toggleMenu }) {  // Receive toggleMenu as prop
   return (

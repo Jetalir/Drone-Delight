@@ -9,7 +9,7 @@ function Menu() {
   if (loading) return <div>Loading menu...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!menuItems || menuItems.length === 0) return <p>No items found.</p>;
-
+  
   return (
     <div className="menu">
       <h1>Menu</h1>
@@ -26,6 +26,7 @@ function Menu() {
                 ))}
               </div>
             )}
+            <button className="addToCart">+</button>
           </div>
         ))}
       </div>

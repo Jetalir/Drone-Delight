@@ -226,6 +226,13 @@
   "users": [
     {
       "id": 1,
+      "name": "user",
+      "email": "user@user.com",
+      "address": "Norra Bulltoftavägen 65C",
+      "phone": "0721234567"
+    },
+    {
+      "id": 2,
       "name": "Jetlir",
       "email": "Jetlir@hotmail.com",
       "address": "Norra Bulltoftavägen 65C",

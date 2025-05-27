@@ -6,6 +6,14 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 100;
+  opacity: 0;
+  transition: opacity 0.1s ease-out 0.1s;
+  pointer-events: none;
+}
+
+.sidemenu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sidemenu {
@@ -13,7 +21,60 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 300px;
-  background: white;
+  width: 500px;
+  background: #DE845E;
   z-index: 101;
+  transform: translateX(-100%);
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.sidemenu.open {
+  transform: translateX(0);
+}
+
+a {
+  color: #fff;
+}
+.sidemenu-navigation {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidemenu-navigation ul {
+  list-style: none;
+}
+
+.sidemenu-navigation li {
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+.sidemenu-navigation a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.sidemenu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 45px 45px 0 35px;
+}
+.menu-close {
+  cursor: pointer;
+  font-size: 32px;
+  color: #fff;
+  background: none;
+  border: none;
+  width: 50px;
+  height: 50px;
+}
+
+.menu-login {
+  display: flex;
+  font-size: 20px;
+  border-radius: 5px;
+  padding-bottom: 15px;
 }

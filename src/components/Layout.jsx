@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiMenu, FiUser, FiShoppingCart } from "react-icons/fi";
 import Footer from "./Footer.jsx";
 import SideMenu from "./Sidemenu.jsx";
-import Logo from '../assets/Logo.png';
+import Logo from '../images/Logo.png';
 import "../styles/Navbar.css"; 
 
 

@@ -5,15 +5,16 @@ import "../styles/Home.css";
 function Home() {
 
     const { data: products, loading, error } = useFetch("http://localhost:3001/menuItems");
-
-    if (loading) return <p>Laddar produkter...</p>;
-    if (error) return <p>Något gick fel: {error.message}</p>;
+  
+    if (loading) return <div>Loading menu...</div>;
+    if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
-      <div>
+    <div className="home-container">
+      <div className="hero-container">
        <h2>Fresh food Zero traffic</h2>
        <p>Food Delivered by Drone in 20 Minutes or Less!</p>
+       <input type="text" placeholder="Search for adress..." className="adress-input" />
       </div>
     
       <div className="product-list">
