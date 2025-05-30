@@ -1,0 +1,9 @@
+.menu-item {
+  max-width: 350px;
+  width: 90%;
+  text-align: center;   /* <-- make sure text and inline elements are centered */
+  margin: 0 auto;       /* <-- center block-level element horizontally */
+  display: flex;        /* <-- enable flexbox to align content */
+  flex-direction: column;
+  align-items: center;  /* <-- center content horizontally */
+}

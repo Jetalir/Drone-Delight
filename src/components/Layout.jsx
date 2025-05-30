@@ -1,8 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FiMenu, FiUser, FiShoppingCart } from "react-icons/fi";
-import Footer from "./Footer.jsx";
 import SideMenu from "./Sidemenu.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 import Logo from '../images/Logo.png';
 import "../styles/Navbar.css"; 
 
@@ -10,6 +10,7 @@ import "../styles/Navbar.css";
 
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,16 +38,18 @@ const Layout = () => {
             <span className="cart-count">0</span>
           </Link>
         </div>
-        <Link to="/profile" className="profile">
+        {user ? (
+          <Link to="/profile" className="profile">
           <FiUser size={32}/>
         </Link>
+        ) : (
+          <Link to="/login" className="profile">
+          <FiUser size={32}/>
+        </Link>
+        )}
       </div>
       </nav>
       <SideMenu isOpen={isMenuOpen} onClose={closeMenu} />
-      <main>
-        <Outlet />
-      </main>
-      <Footer/>
     </div>
   );
 };

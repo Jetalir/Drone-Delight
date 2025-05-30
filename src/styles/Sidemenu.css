@@ -36,6 +36,10 @@
 a {
   color: #fff;
 }
+
+.sidemenu-nav a{
+  color: #fff;
+}
 .sidemenu-navigation {
   display: flex;
   flex-direction: column;
@@ -76,5 +80,13 @@ a {
   display: flex;
   font-size: 20px;
   border-radius: 5px;
-  padding-bottom: 15px;
+  text-decoration: underline;
+}
+.menu-logout {
+  display: flex;
+  font-size: 20px;
+  text-decoration: underline;
+  color: #fff;
+  background-color: transparent;
+  border: none;
 }

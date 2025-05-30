@@ -1,145 +1,164 @@
 {
   "menuItems": [
-
     {
-      "id": 1,
-      "name": "Spicy Pepperoni Pizza",
-      "description": "Pepperoni with jalapeños, extra cheese, and spicy tomato sauce.",
+      "id": "1",
+      "name": "Pepperoni Pizza",
+      "description": "Pepperoni with extra cheese, and tomato sauce.",
       "price": 109,
       "category": "Popular",
       "subcategory": "Pizza",
-      "image": "https://example.com/pepperoni.jpg",
-      "tags": ["Spicy", "Best Seller"]
+      "image": "pepperoni-pizza.jpg",
+      "tags": [
+        "Best Seller",
+        "Spicy"
+      ]
     },
     {
-      "id": 2,
-      "name": "Truffle Mushroom Pasta",
-      "description": "Creamy pasta with wild mushrooms, truffle oil, and parmesan.",
+      "id": "2",
+      "name": "Pasta Carbonara",
+      "description": "Creamy pasta with ham and parmesan.",
       "price": 115,
       "category": "Popular",
       "subcategory": "Pasta",
-      "image": "https://example.com/truffle-pasta.jpg",
-      "tags": ["Vegetarian"]
+      "image": "pasta-carbonara.jpg",
+      "tags": [
+        "Best Seller",
+        "Creamy"
+      ]
     },
     {
-      "id": 3,
-      "name": "Double Bacon Cheeseburger",
+      "id": "3",
+      "name": "Bacon Cheeseburger",
       "description": "Two beef patties, smoked bacon, cheddar, and BBQ sauce.",
       "price": 95,
       "category": "Popular",
       "subcategory": "Burger",
-      "image": "https://example.com/bacon-burger.jpg",
-      "tags": ["Best Seller"]
+      "image": "bacon-cheeseburger.jpg",
+      "tags": [
+        "Best Seller"
+      ]
     },
-
-
     {
-      "id": 4,
+      "id": "4",
       "name": "Margherita Pizza",
       "description": "Classic tomato sauce, mozzarella, and basil.",
       "price": 99,
       "category": "Main",
       "subcategory": "Pizza",
       "image": "https://example.com/margherita.jpg",
-      "tags": ["Vegetarian"]
+      "tags": [
+        "Vegetarian"
+      ]
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Vegan Beyond Burger",
       "description": "Plant-based patty with lettuce, tomato, and vegan mayo.",
       "price": 89,
       "category": "Main",
       "subcategory": "Burger",
       "image": "https://example.com/vegan-burger.jpg",
-      "tags": ["Vegetarian", "Vegan"]
+      "tags": [
+        "Vegetarian",
+        "Vegan"
+      ]
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Chicken Alfredo Pasta",
       "description": "Creamy Alfredo sauce with grilled chicken.",
       "price": 105,
       "category": "Main",
       "subcategory": "Pasta",
       "image": "https://example.com/alfredo.jpg",
-      "tags": ["Creamy"]
+      "tags": [
+        "Creamy"
+      ]
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Caesar Salad",
       "description": "Romaine lettuce, croutons, parmesan, and Caesar dressing.",
       "price": 85,
       "category": "Main",
       "subcategory": "Salad",
       "image": "https://example.com/caesar-salad.jpg",
-      "tags": ["Vegetarian"]
+      "tags": [
+        "Vegetarian"
+      ]
     },
-
     {
-      "id": 8,
-      "name": "Garlic Parmesan Fries",
-      "description": "Crispy fries tossed in garlic butter and parmesan.",
+      "id": "8",
+      "name": "Fries",
+      "description": "Crispy fries.",
       "price": 45,
       "category": "Side",
       "subcategory": "Appetizer",
-      "image": "https://example.com/garlic-fries.jpg",
-      "tags": []
+      "image": "fries.png",
+      "tags": ["Vegetarian"]
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Mozzarella Sticks (6 pcs)",
       "description": "Fried mozzarella with marinara sauce.",
       "price": 55,
       "category": "Side",
-      "subcategory": "Appetizer",
+      "subcategory": "Sides",
       "image": "https://example.com/mozzarella-sticks.jpg",
-      "tags": ["Vegetarian"]
+      "tags": [
+        "Vegetarian"
+      ]
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Chicken Wings (8 pcs)",
       "description": "Crispy wings with BBQ or buffalo sauce.",
       "price": 75,
       "category": "Side",
-      "subcategory": "Appetizer",
+      "subcategory": "Chicken",
       "image": "https://example.com/wings.jpg",
-      "tags": ["Spicy"]
+      "tags": [
+        "Spicy"
+      ]
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Onion Rings",
       "description": "Golden-fried crispy onion rings.",
       "price": 40,
       "category": "Side",
-      "subcategory": "Appetizer",
+      "subcategory": "Sides",
       "image": "https://example.com/onion-rings.jpg",
-      "tags": ["Vegetarian"]
+      "tags": [
+        "Vegetarian"
+      ]
     },
-
-
     {
-      "id": 12,
+      "id": "12",
       "name": "Chocolate Lava Cake",
       "description": "Warm chocolate cake with a molten center.",
       "price": 65,
       "category": "Dessert",
       "subcategory": "Sweet",
       "image": "https://example.com/lava-cake.jpg",
-      "tags": ["Chocolate"]
+      "tags": [
+        "Chocolate"
+      ]
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Vanilla Ice Cream",
       "description": "Creamy vanilla ice cream with caramel drizzle.",
       "price": 45,
       "category": "Dessert",
       "subcategory": "Frozen",
       "image": "https://example.com/vanilla-ice-cream.jpg",
-      "tags": ["Vegetarian"]
+      "tags": [
+        "Vegetarian"
+      ]
     },
-
-
     {
-      "id": 14,
+      "id": "14",
       "name": "Classic Cola (33cl)",
       "description": "Refreshing cola with a balanced flavor.",
       "price": 25,
@@ -149,7 +168,7 @@
       "tags": []
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "Iced Lemon Tea (50cl)",
       "description": "Refreshing black tea with lemon.",
       "price": 30,
@@ -159,7 +178,7 @@
       "tags": []
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "Sparkling Water (33cl)",
       "description": "Natural mineral water with bubbles.",
       "price": 25,
@@ -169,7 +188,7 @@
       "tags": []
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "Energy Drink (50cl)",
       "description": "Electrolyte-enhanced energy boost.",
       "price": 45,
@@ -179,64 +198,91 @@
       "tags": []
     }
   ],
-
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Popular",
-      "subcategories": ["Pizza", "Pasta", "Burger"]
+      "subcategories": [
+        "Pizza"
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Main",
-      "subcategories": ["Pizza", "Burger", "Pasta", "Salad"]
+      "subcategories": [
+        "Pizza",
+        "Burger",
+        "Pasta",
+        "Salad"
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Side",
-      "subcategories": ["Appetizer"]
+      "subcategories": [
+        "Sides",
+        "Chicken"
+      ]
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Dessert",
-      "subcategories": ["Sweet", "Frozen"]
+      "subcategories": [
+        "Sweet",
+        "Frozen"
+      ]
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Drink",
-      "subcategories": ["Soda", "Non-Soda", "Energy"]
+      "subcategories": [
+        "Soda",
+        "Non-Soda",
+        "Energy"
+      ]
     }
   ],
-
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "items": [
-        { "menuItemId": 1, "quantity": 1 },
-        { "menuItemId": 8, "quantity": 1 },
-        { "menuItemId": 12, "quantity": 1 }
+        {
+          "menuItemId": 1,
+          "quantity": 1
+        },
+        {
+          "menuItemId": 8,
+          "quantity": 1
+        },
+        {
+          "menuItemId": 12,
+          "quantity": 1
+        }
       ],
       "total": 219,
       "status": "Delivered",
       "date": "2023-05-20"
     }
   ],
-
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "user",
       "email": "user@user.com",
-      "address": "Norra Bulltoftavägen 65C",
-      "phone": "0721234567"
+      "password": "password"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jetlir",
       "email": "Jetlir@hotmail.com",
-      "address": "Norra Bulltoftavägen 65C",
-      "phone": "0728633128"
+      "password": "jet123"
+    },
+    {
+      "id": "fc1f",
+      "name": "adsadsad",
+      "email": "asddsaasd@dasdas.se",
+      "password": "jet123"
     }
   ]
 }

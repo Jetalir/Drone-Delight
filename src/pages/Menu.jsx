@@ -1,10 +1,15 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
+import MenuItem from "../components/MenuItem";
 import "../styles/Menu.css";
 
 function Menu() {
-  // Fetch ALL menu items (no ID filter)
   const { data: menuItems, loading, error } = useFetch("http://localhost:3001/menuItems");
+
+  const handleAddToCart = (item) => {
+    // Lägg till funktionen för lägg till i kundvagn genom CartContext
+    console.log("Added to cart:", item);
+  };
 
   if (loading) return <div>Loading menu...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -15,18 +20,15 @@ function Menu() {
       <h1>Menu</h1>
       <div className="menu-items">
         {menuItems.map((item) => (
-          <div key={item.id} className="menu-item">
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <p><strong>{item.price} SEK</strong></p>
-            {item.tags?.length > 0 && (
-              <div className="tags">
-                {item.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
-                ))}
-              </div>
-            )}
-            <button className="addToCart">+</button>
+          <div key={item.id} className="menu-item-card"> {/* Changed class name */}
+            <MenuItem
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              tags={item.tags}
+              image={item.image}
+            />
+            <button className="addToCart" onClick={() => handleAddToCart(item)}>+</button>
           </div>
         ))}
       </div>
