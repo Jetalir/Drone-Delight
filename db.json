@@ -5,63 +5,68 @@
       "name": "Pepperoni Pizza",
       "description": "Pepperoni with extra cheese, and tomato sauce.",
       "price": 109,
-      "category": "Popular",
+      "category": "Main",
       "subcategory": "Pizza",
       "image": "pepperoni-pizza.jpg",
       "tags": [
         "Best Seller",
         "Spicy"
-      ]
+      ],
+      "isPopular": true
     },
     {
       "id": "2",
-      "name": "Pasta Carbonara",
-      "description": "Creamy pasta with ham and parmesan.",
-      "price": 115,
-      "category": "Popular",
-      "subcategory": "Pasta",
-      "image": "pasta-carbonara.jpg",
+      "name": "Margherita Pizza",
+      "description": "Classic tomato sauce, mozzarella, and basil.",
+      "price": 99,
+      "category": "Main",
+      "subcategory": "Pizza",
+      "image": "pizza-margherita.avif",
       "tags": [
-        "Best Seller",
-        "Creamy"
-      ]
+        "Vegetarian"
+      ],
+      "isPopular": false
     },
     {
       "id": "3",
       "name": "Bacon Cheeseburger",
       "description": "Two beef patties, smoked bacon, cheddar, and BBQ sauce.",
       "price": 95,
-      "category": "Popular",
+      "category": "Main",
       "subcategory": "Burger",
       "image": "bacon-cheeseburger.jpg",
       "tags": [
         "Best Seller"
-      ]
+      ],
+      "isPopular": true
     },
     {
       "id": "4",
-      "name": "Margherita Pizza",
-      "description": "Classic tomato sauce, mozzarella, and basil.",
-      "price": 99,
-      "category": "Main",
-      "subcategory": "Pizza",
-      "image": "https://example.com/margherita.jpg",
-      "tags": [
-        "Vegetarian"
-      ]
-    },
-    {
-      "id": "5",
       "name": "Vegan Beyond Burger",
       "description": "Plant-based patty with lettuce, tomato, and vegan mayo.",
       "price": 89,
       "category": "Main",
       "subcategory": "Burger",
-      "image": "https://example.com/vegan-burger.jpg",
+      "image": "vegan-burger.jpg",
       "tags": [
         "Vegetarian",
         "Vegan"
-      ]
+      ],
+      "isPopular": false
+    },
+    {
+      "id": "5",
+      "name": "Pasta Carbonara",
+      "description": "Creamy pasta with ham and parmesan.",
+      "price": 115,
+      "category": "Main",
+      "subcategory": "Pasta",
+      "image": "pasta-carbonara.webp",
+      "tags": [
+        "Best Seller",
+        "Creamy"
+      ],
+      "isPopular": true
     },
     {
       "id": "6",
@@ -70,10 +75,11 @@
       "price": 105,
       "category": "Main",
       "subcategory": "Pasta",
-      "image": "https://example.com/alfredo.jpg",
+      "image": "chicken-alfredo.jpg",
       "tags": [
         "Creamy"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "7",
@@ -82,10 +88,11 @@
       "price": 85,
       "category": "Main",
       "subcategory": "Salad",
-      "image": "https://example.com/caesar-salad.jpg",
+      "image": "caesar-salad.png",
       "tags": [
         "Vegetarian"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "8",
@@ -95,31 +102,36 @@
       "category": "Side",
       "subcategory": "Appetizer",
       "image": "fries.png",
-      "tags": ["Vegetarian"]
+      "tags": [
+        "Vegetarian"
+      ],
+      "isPopular": true
     },
     {
       "id": "9",
-      "name": "Mozzarella Sticks (6 pcs)",
+      "name": "Mozzarella Sticks",
       "description": "Fried mozzarella with marinara sauce.",
       "price": 55,
       "category": "Side",
       "subcategory": "Sides",
-      "image": "https://example.com/mozzarella-sticks.jpg",
+      "image": "mozzarella-sticks.png",
       "tags": [
         "Vegetarian"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "10",
-      "name": "Chicken Wings (8 pcs)",
+      "name": "Chicken Wings",
       "description": "Crispy wings with BBQ or buffalo sauce.",
       "price": 75,
       "category": "Side",
       "subcategory": "Chicken",
-      "image": "https://example.com/wings.jpg",
+      "image": "chicken-wings.png",
       "tags": [
         "Spicy"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "11",
@@ -128,10 +140,11 @@
       "price": 40,
       "category": "Side",
       "subcategory": "Sides",
-      "image": "https://example.com/onion-rings.jpg",
+      "image": "onion-rings.png",
       "tags": [
         "Vegetarian"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "12",
@@ -140,10 +153,11 @@
       "price": 65,
       "category": "Dessert",
       "subcategory": "Sweet",
-      "image": "https://example.com/lava-cake.jpg",
+      "image": "lava-cake.png",
       "tags": [
         "Chocolate"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "13",
@@ -152,50 +166,55 @@
       "price": 45,
       "category": "Dessert",
       "subcategory": "Frozen",
-      "image": "https://example.com/vanilla-ice-cream.jpg",
+      "image": "vanilla-ice-cream.png",
       "tags": [
         "Vegetarian"
-      ]
+      ],
+      "isPopular": false
     },
     {
       "id": "14",
-      "name": "Classic Cola (33cl)",
-      "description": "Refreshing cola with a balanced flavor.",
+      "name": "Coca Cola ",
+      "description": "Refreshing cola with a balanced flavor. (33cl)",
       "price": 25,
       "category": "Drink",
       "subcategory": "Soda",
-      "image": "https://example.com/classic-cola.jpg",
-      "tags": []
+      "image": "coca-cola.png",
+      "tags": [],
+      "isPopular": false
     },
     {
       "id": "15",
-      "name": "Iced Lemon Tea (50cl)",
-      "description": "Refreshing black tea with lemon.",
+      "name": "Homemade Ice Tea",
+      "description": "Refreshing homemade black tea with lemon. (50cl)",
       "price": 30,
       "category": "Drink",
       "subcategory": "Non-Soda",
-      "image": "https://example.com/iced-tea.jpg",
-      "tags": []
+      "image": "ice-tea.png",
+      "tags": [],
+      "isPopular": false
     },
     {
       "id": "16",
-      "name": "Sparkling Water (33cl)",
-      "description": "Natural mineral water with bubbles.",
+      "name": "Sparkling Water",
+      "description": "Natural mineral water with bubbles. (50cl)",
       "price": 25,
       "category": "Drink",
       "subcategory": "Non-Soda",
-      "image": "https://example.com/sparkling-water.jpg",
-      "tags": []
+      "image": "sparkling-water.png",
+      "tags": [],
+      "isPopular": false
     },
     {
       "id": "17",
-      "name": "Energy Drink (50cl)",
-      "description": "Electrolyte-enhanced energy boost.",
+      "name": "Redbull",
+      "description": "Redbull gives you wings. (25cl)",
       "price": 45,
       "category": "Drink",
       "subcategory": "Energy",
-      "image": "https://example.com/energy-drink.jpg",
-      "tags": []
+      "image": "redbull.png",
+      "tags": [],
+      "isPopular": false
     }
   ],
   "categories": [
@@ -242,6 +261,28 @@
       ]
     }
   ],
+  "users": [
+    {
+      "id": "1",
+      "name": "user",
+      "email": "user@user.com",
+      "password": "password",
+      "favoriteItem": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Jetlir",
+      "email": "Jetlir@hotmail.com",
+      "password": "jet123",
+      "favoriteItem": [
+        3,
+        4
+      ]
+    }
+  ],
   "orders": [
     {
       "id": "1",
@@ -261,28 +302,9 @@
         }
       ],
       "total": 219,
-      "status": "Delivered",
-      "date": "2023-05-20"
+      "date": "2023-05-20",
+      "paymentMethod": "Credit Card"
     }
   ],
-  "users": [
-    {
-      "id": "1",
-      "name": "user",
-      "email": "user@user.com",
-      "password": "password"
-    },
-    {
-      "id": "2",
-      "name": "Jetlir",
-      "email": "Jetlir@hotmail.com",
-      "password": "jet123"
-    },
-    {
-      "id": "fc1f",
-      "name": "adsadsad",
-      "email": "asddsaasd@dasdas.se",
-      "password": "jet123"
-    }
-  ]
+  "cart": []
 }

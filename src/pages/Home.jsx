@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import GetImage from "../components/GetImage";
 import "../styles/Home.css";
 
 function Home() {
-  const {
-    data: popularItems,
-    loading,
-    error,
-  } = useFetch("http://localhost:3001/menuItems?category=Popular");
+  const { data: popularItems, loading, error,
+  } = useFetch("http://localhost:3001/menuItems?isPopular=true");
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(null);
   const [slideDirection, setSlideDirection] = useState(null); // 'left' or 'right'
 
+
   const intervalRef = useRef(null);
+  
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/menu");
+  }
 
   const resetAutoSlide = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -82,11 +86,12 @@ function Home() {
       <div className="hero-container">
         <h2>Fresh food Zero traffic</h2>
         <p>Food Delivered by Drone in 20 Minutes or Less!</p>
-        <input
+        {/* <input
           type="text"
           placeholder="Search for address..."
           className="adress-input"
-        />
+        /> */}
+        <button onClick={handleNavigate} className="order-button">Order Now</button>
       </div>
 
       <section className="popular-dishes">

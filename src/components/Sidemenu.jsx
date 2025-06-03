@@ -45,7 +45,7 @@ function Sidemenu({ isOpen, onClose }) {
             <button className="menu-close" onClick={onClose}>
               <FiX />
             </button>
-
+        
             {user ? (
               <button className="menu-logout" onClick={handleLogout}>
                 Log out

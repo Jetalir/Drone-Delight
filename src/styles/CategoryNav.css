@@ -1,0 +1,29 @@
+.category-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  overflow-x: auto;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ccc;
+  top: 100px;
+  z-index: 10;
+}
+
+.category-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #333;
+  border-radius: 20px;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.category-button:hover,
+.category-button.active {
+  background-color: #E79B72;
+  color: white;
+}

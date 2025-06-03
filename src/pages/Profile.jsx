@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import OrderHistory from "../components/OrderHistory";
+import "../styles/Profile.css";
 
 const Profile = () => {
 
@@ -14,7 +16,7 @@ const Profile = () => {
 
 
 
-  return <div>Profile</div>;
+  return <div><OrderHistory/></div>;
 };
 
 export default Profile;

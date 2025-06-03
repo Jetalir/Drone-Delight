@@ -1,83 +1,211 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+// src/contexts/CartContext.js
+import React, { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
-// Create Context
 const CartContext = createContext();
+export const useCart = () => useContext(CartContext);
 
-// Provider Component
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    // Load cart from localStorage if available
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+const LOCAL_KEY = "guest_cart";
+const API_URL = "http://localhost:3001/cart";
 
-  // Save cart to localStorage whenever it changes
+export const CartProvider = ({ userId, children }) => {
+  const isGuest = !userId;
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load cart on mount or when changed
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    isGuest ? loadLocalCart() : fetchServerCart();
+  }, [userId]);
+
+  // Load Cart items from Local Storage
+  const loadLocalCart = () => {
+    const stored = localStorage.getItem(LOCAL_KEY);
+    setCartItems(stored ? JSON.parse(stored) : []);
+    setLoading(false);
+  };
+
+  // Save to Local Storage
+  const saveLocalCart = (items) => {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(items));
+    setCartItems(items);
+  };
+
+  // Fetch item from server
+  const fetchServerCart = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`${API_URL}?userId=${userId}`);
+      setCartItems(res.data);
+    } catch (err) {
+      console.error("Error loading cart:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Add item to cart
-  const addToCart = (item) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((i) => i.id === item.id);
-      if (existingItem) {
-        return prevItems.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+  const addToCart = async (menuItemId, quantity = 1) => {
+    if (isGuest) {
+      // if not logged in, use local storage
+      const existing = cartItems.find((item) => item.menuItemId === menuItemId);
+      let updatedCart;
+      if (existing) {
+        updatedCart = cartItems.map((item) =>
+          item.menuItemId === menuItemId
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
+      } else {
+        updatedCart = [...cartItems, { menuItemId, quantity }];
       }
-      return [...prevItems, { ...item, quantity: 1 }];
-    });
+      saveLocalCart(updatedCart);
+    } else {
+      // if logged in, use json server
+      try {
+        const existing = cartItems.find(
+          (item) => item.menuItemId === menuItemId
+        );
+        if (existing) {
+          const updated = {
+            ...existing,
+            quantity: existing.quantity + quantity,
+          };
+          await axios.put(`${API_URL}/${existing.id}`, updated);
+        } else {
+          const newItem = { userId, menuItemId, quantity };
+          await axios.post(API_URL, newItem);
+        }
+        fetchServerCart();
+      } catch (err) {
+        console.error("Error adding to cart:", err);
+      }
+    }
   };
 
-  // Remove item from cart
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((i) => i.id !== itemId));
-  };
-
-  // Update item quantity
-  const updateQuantity = (itemId, newQuantity) => {
-    if (newQuantity < 1) {
-      removeFromCart(itemId);
+  const updateQuantity = async (menuItemId, quantity) => {
+    if (quantity < 1) {
+      // If quantity is less than 1, remove the item instead
+      removeFromCart(menuItemId);
       return;
     }
 
-    setCartItems((prevItems) =>
-      prevItems.map((i) =>
-        i.id === itemId ? { ...i, quantity: newQuantity } : i
-      )
-    );
+    if (isGuest) {
+      // Guest: update localStorage cart
+      const existing = cartItems.find((item) => item.menuItemId === menuItemId);
+      let updatedCart;
+      if (existing) {
+        updatedCart = cartItems.map((item) =>
+          item.menuItemId === menuItemId ? { ...item, quantity } : item
+        );
+      } else {
+        // If item not in cart, add it with quantity
+        updatedCart = [...cartItems, { menuItemId, quantity }];
+      }
+      saveLocalCart(updatedCart);
+    } else {
+      // Logged-in user: update server cart
+      try {
+        const existing = cartItems.find(
+          (item) => item.menuItemId === menuItemId
+        );
+        if (existing) {
+          const updated = { ...existing, quantity };
+          await axios.put(`${API_URL}/${existing.id}`, updated);
+        } else {
+          const newItem = { userId, menuItemId, quantity };
+          await axios.post(API_URL, newItem);
+        }
+        fetchServerCart(); // refresh after update
+      } catch (err) {
+        console.error("Error updating quantity:", err);
+      }
+    }
+  };
+  // Decrease item quantity
+  const decreaseFromCart = (menuItemId) => {
+    const existing = cartItems.find((item) => item.menuItemId === menuItemId);
+    if (!existing) return;
+
+    const newQuantity = existing.quantity - 1;
+    updateQuantity(menuItemId, newQuantity);
   };
 
-  // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  // Remove item
+  const removeFromCart = async (menuItemId) => {
+    if (isGuest) {
+      const updated = cartItems.filter(
+        (item) => item.menuItemId !== menuItemId
+      );
+      saveLocalCart(updated);
+    } else {
+      const item = cartItems.find((item) => item.menuItemId === menuItemId);
+      if (!item) return;
+      try {
+        await axios.delete(`${API_URL}/${item.id}`);
+        fetchServerCart();
+      } catch (err) {
+        console.error("Error removing from cart:", err);
+      }
+    }
+  };
 
   // Clear cart
-  const clearCart = () => {
-    setCartItems([]);
+  const clearCart = async () => {
+    if (isGuest) {
+      localStorage.removeItem(LOCAL_KEY);
+      setCartItems([]);
+    } else {
+      try {
+        const deletes = cartItems.map((item) =>
+          axios.delete(`${API_URL}/${item.id}`)
+        );
+        await Promise.all(deletes);
+        setCartItems([]);
+      } catch (err) {
+        console.error("Error clearing cart:", err);
+      }
+    }
   };
 
-  // Context value
-  const value = {
-    cartItems,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    totalPrice,
-    clearCart,
-    cartCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),
+  // Get cart items enriched with full menu item data
+  const getCartItems = async () => {
+    try {
+      // Fetch menu items
+      const { data: menuItems } = await axios.get(
+        "http://localhost:3001/menuItems"
+      );
+
+      return cartItems.map((cartItem) => {
+        const menuItem = menuItems.find(
+          (item) => String(item.id) === String(cartItem.menuItemId)
+        );
+        return {
+          ...cartItem,
+          ...menuItem,
+        };
+      });
+    } catch (err) {
+      console.error("Error fetching full cart items:", err);
+      return cartItems;
+    }
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-};
-
-// Custom hook for easy access
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
+  return (
+    <CartContext.Provider
+      value={{
+        cartItems,
+        loading,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        decreaseFromCart,
+        refreshCart: isGuest ? loadLocalCart : fetchServerCart,
+        getCartItems,
+        updateQuantity, 
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };

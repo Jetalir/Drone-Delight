@@ -26,6 +26,17 @@
   display: block;
 }
 
+.order-button{
+  background-color: #E79B72;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .popular-dishes {
   text-align: center;
 }
