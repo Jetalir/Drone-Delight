@@ -272,11 +272,7 @@
       "name": "user",
       "email": "user@user.com",
       "password": "password",
-      "favoriteItems": [
-        "2",
-        "3",
-        "4"
-      ]
+      "favoriteItems": []
     },
     {
       "id": "2",

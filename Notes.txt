@@ -1,6 +1,5 @@
---all servers to start--
+--Servers to start--
 npm start
-npx json-server --watch db.json --port 3001
 node server.js
 
 rafce (fast startup file)
@@ -12,8 +11,8 @@ npm install
 mdb-ui-kit
 axios
 bootstrap
-json-server
 react-router-dom
+express cors body-parser jsonwebtoken
 
 
 git status
