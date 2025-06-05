@@ -1,77 +1,69 @@
 .order-confirmation {
-  padding: 2rem;
-  text-align: center;
-  color: #3e3e3e;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1.5rem;
+  font-family: Arial, sans-serif;
+  color: #222;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.order-confirmation__heading {
-  font-size: 2.5rem;
-  font-weight: 700;
+.order-confirmation h1 {
+  font-size: 2rem;
+  color: #DE845E;
   margin-bottom: 1rem;
+}
+
+.order-confirmation p {
+  margin-bottom: 0.5rem;
+}
+
+.order-confirmation strong {
   color: #DE845E;
 }
 
-.order-confirmation__info {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-}
-
-.order-confirmation__info strong {
+.order-confirmation h2,
+.order-confirmation h3 {
   color: #DE845E;
-}
-
-.order-confirmation__summary-heading {
-  font-size: 1.8rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #DE845E;
-  font-weight: 600;
 }
 
 .order-summary-table {
-  margin: 0 auto 2rem auto;
-  width: 80%;
-  max-width: 700px;
+  width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
-  box-shadow: 0 0 5px rgba(222, 132, 94, 0.3);
-  border-radius: 8px;
-  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
-.order-summary-table__head th {
-  background-color: #DE845E;
-  color: white;
-  font-weight: 600;
-  padding: 0.75rem 1rem;
+.order-summary-table th,
+.order-summary-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
   text-align: left;
 }
 
-.order-summary-table__body td {
-  border-bottom: 1px solid #ddd;
-  padding: 0.75rem 1rem;
+.order-summary-table th {
+  background-color: #f9f9f9;
+  color: #DE845E;
 }
 
-.order-summary-table__body tr:last-child td {
-  border-bottom: none;
+.order-summary-table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .order-confirmation__total {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: bold;
   color: #DE845E;
   margin-bottom: 2rem;
 }
 
 .order-confirmation__btn {
   background-color: #DE845E;
-  border: none;
   color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

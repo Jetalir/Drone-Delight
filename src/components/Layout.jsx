@@ -28,8 +28,6 @@ const Layout = () => {
     setIsPopupOpen((prev) => !prev);
   };
 
- 
-
   return (
     <div className="layout">
       <nav className="navbar">

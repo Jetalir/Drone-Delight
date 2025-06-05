@@ -10,8 +10,7 @@ function Home() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(null);
-  const [slideDirection, setSlideDirection] = useState(null); // 'left' or 'right'
-
+  const [slideDirection, setSlideDirection] = useState(null);
 
   const intervalRef = useRef(null);
   
@@ -112,10 +111,12 @@ function Home() {
                         : "slide-in-left active"
                       : ""
                   }`}
-                  style={{ display: activeIndex === index ? "flex" : "none" }}
+                  style={{ display: activeIndex === index ? "flex" : "none"}}
+                  onClick={() => navigate("/menu", {state: {filter: "Popular"}})}
                 >
                   <div className="carousel-menu-item">
-                    <GetImage image={item.image} name={item.name} />
+                    
+                    <GetImage onClick={handleNavigate} image={item.image} name={item.name} />
                     <h2>{item.name}</h2>
                     <p>{item.description}</p>
                     <p>
@@ -147,7 +148,6 @@ function Home() {
             ))}
           </div>
           </div>
-          
         </div>
       </section>
     </div>

@@ -21,7 +21,8 @@
 /* Table Styles */
 .table-wrapper {
   overflow-x: auto;
-  margin-bottom: 2rem;
+    max-width: 100vw;
+  padding-bottom: 0.5rem;
 }
 .checkout-table {
   width: 100%;
@@ -149,6 +150,23 @@
   color: #666;
 }
 
+.user-details-form {
+  margin: 2rem 0;
+}
+
+.user-details-form h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+
 /* Summary */
 .payment-summary {
   flex: 1;
@@ -186,11 +204,29 @@ input.error {
   background-color: #fff5f5;
 }
 
-
-/* Responsive Height */
 @media (min-width: 1025px) {
   .checkout-section {
     height: 100vh;
+  }
+}
+
+@media (max-width: 650px) {
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100vw;
+    padding-bottom: 0.5rem;
+  }
+  .table-wrapper p {
+    font-size: 0.9rem;
+  }
+  .quantity-control input.qty-input {
+    width: 40px;
+    font-size: 0.9rem;
+  }
+
+  .item-img {
+    width: 50%;
   }
 }
 

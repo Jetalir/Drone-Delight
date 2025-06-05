@@ -1,7 +1,7 @@
 .hero-container {
   color: rgb(5, 5, 5);
   text-align: center;
-  padding: 2rem 0 3rem 0;
+  padding: 2rem 0 2rem 0;
   border-radius: 0 0 40px 40px;
 }
 
@@ -15,6 +15,7 @@
   margin-bottom: 1.5rem;
 }
 
+/* For adress input */
 .adress-input {
   padding: 0.75rem 1rem;
   font-size: 1rem;
@@ -25,7 +26,7 @@
   margin: 0 auto;
   display: block;
 }
-
+/* For Order now button */
 .order-button{
   background-color: #E79B72;
   color: white;
@@ -91,6 +92,10 @@
   overflow: hidden;
   display: flex;
   position: relative;
+  
+}
+.carousel-item-container:hover{
+  cursor: pointer;
 }
 
 .carousel-item {
@@ -166,4 +171,13 @@
 
 .indicator-btn.active {
   background-color: #DE845E;
+}
+
+@media (max-width: 650px) {
+  .carousel-menu-item img {
+    width: 100%; 
+    height: auto;  
+    max-height: 300px;
+    object-fit: contain;
+  }
 }

@@ -259,6 +259,11 @@
         "Non-Soda",
         "Energy"
       ]
+    },
+    {
+      "id": "6",
+      "name": "Favorite",
+      "subcategories": []
     }
   ],
   "users": [
@@ -267,9 +272,10 @@
       "name": "user",
       "email": "user@user.com",
       "password": "password",
-      "favoriteItem": [
-        1,
-        2
+      "favoriteItems": [
+        "2",
+        "3",
+        "4"
       ]
     },
     {
@@ -277,33 +283,37 @@
       "name": "Jetlir",
       "email": "Jetlir@hotmail.com",
       "password": "jet123",
-      "favoriteItem": [
-        3,
-        4
+      "favoriteItems": [
+        "3",
+        "4"
       ]
     }
   ],
   "orders": [
     {
-      "id": "1",
-      "userId": 1,
+      "userId": "1",
       "items": [
         {
-          "menuItemId": 1,
-          "quantity": 1
+          "menuItemId": "2",
+          "quantity": 3
         },
         {
-          "menuItemId": 8,
-          "quantity": 1
+          "menuItemId": "3",
+          "quantity": 3
         },
         {
-          "menuItemId": 12,
+          "menuItemId": "4",
           "quantity": 1
         }
       ],
-      "total": 219,
-      "date": "2023-05-20",
-      "paymentMethod": "Credit Card"
+      "total": 671,
+      "date": "2025-06-05",
+      "paymentMethod": "Swish",
+      "name": "Jet",
+      "address": "Heyoo",
+      "city": "Malmö",
+      "postalCode": "32132",
+      "id": "1749152349907"
     }
   ],
   "cart": []

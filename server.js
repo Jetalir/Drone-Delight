@@ -5,22 +5,23 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
 const app = express();
-const PORT = 5000;
-const SECRET_KEY = "your_secret_key"; // 👈 make this secure in real apps
+const PORT = 3001;
+const SECRET_KEY = "your_secret_key"; // replace with secure value in production
 
 app.use(cors());
 app.use(bodyParser.json());
 
-// Read users from db.json
-const getUsers = () => {
-  const data = JSON.parse(fs.readFileSync("./db.json", "UTF-8"));
-  return data.users || [];
-};
+// Helpers to read/write db.json
+const getData = () => JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+const saveData = (data) => fs.writeFileSync("./db.json", JSON.stringify(data, null, 2));
+
+// ----- AUTH -----
 
 // Login route
 app.post("/login", (req, res) => {
   const { name, password } = req.body;
-  const users = getUsers();
+  const users = getData().users || [];
+
   const user = users.find(
     (u) => (u.name === name || u.email === name) && u.password === password
   );
@@ -43,7 +44,7 @@ app.post("/login", (req, res) => {
   }
 });
 
-// Protected route example
+// Protected example route
 app.get("/profile", (req, res) => {
   const authHeader = req.headers.authorization;
 
@@ -59,6 +60,141 @@ app.get("/profile", (req, res) => {
   }
 });
 
+// ----- MENU ITEMS -----
+
+app.get("/menuItems", (req, res) => {
+  const data = getData();
+  let menuItems = data.menuItems || [];
+
+  if (req.query.isPopular) {
+    const isPopular = req.query.isPopular === "true";
+    menuItems = menuItems.filter(item => !!item.isPopular === isPopular);
+  }
+
+  res.json(menuItems);
+});
+
+
+// ----- CART -----
+
+// Get cart items, optionally filtered by userId
+app.get("/cart", (req, res) => {
+  const { userId } = req.query;
+  const data = getData();
+  const cart = data.cart || [];
+
+  if (userId) {
+    return res.json(cart.filter(item => String(item.userId) === String(userId)));
+  }
+
+  res.json(cart);
+});
+
+// Add new cart item
+app.post("/cart", (req, res) => {
+  const newItem = req.body;
+  const data = getData();
+
+  if (!data.cart) data.cart = [];
+
+  // Assign a unique id (you can use timestamp or better ID generator)
+  newItem.id = Date.now().toString();
+
+  data.cart.push(newItem);
+  saveData(data);
+
+  res.status(201).json(newItem);
+});
+
+// Update existing cart item
+app.put("/cart/:id", (req, res) => {
+  const { id } = req.params;
+  const updatedItem = req.body;
+  const data = getData();
+
+  const cart = data.cart || [];
+  const index = cart.findIndex(item => item.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "Cart item not found" });
+  }
+
+  cart[index] = { ...cart[index], ...updatedItem };
+  saveData(data);
+
+  res.json(cart[index]);
+});
+
+// Delete cart item
+app.delete("/cart/:id", (req, res) => {
+  const { id } = req.params;
+  const data = getData();
+
+  const cart = data.cart || [];
+  const index = cart.findIndex(item => item.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "Cart item not found" });
+  }
+
+  cart.splice(index, 1);
+  saveData(data);
+
+  res.status(204).end();
+});
+
+
+// ----- ORDERS -----
+
+// Get all orders or filter by userId
+app.get("/orders", (req, res) => {
+  const { userId } = req.query;
+  const data = getData();
+  const orders = data.orders || [];
+
+  if (userId) {
+    return res.json(orders.filter((order) => order.userId == userId));
+  }
+
+  res.json(orders);
+});
+
+// Create new order
+app.post("/orders", (req, res) => {
+  const newOrder = req.body;
+  const data = getData();
+
+  newOrder.id = Date.now().toString();
+  data.orders.push(newOrder);
+
+  saveData(data);
+  res.status(201).json(newOrder);
+});
+
+app.put("/users/:id", (req, res) => {
+  const { id } = req.params;
+  const updatedUser = req.body;
+  const data = getData();
+  const users = data.users || [];
+
+  const index = users.findIndex(u => String(u.id) === String(id));
+  if (index === -1) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  if (updatedUser.favoriteItems !== undefined) {
+    users[index].favoriteItems = updatedUser.favoriteItems;
+  }
+
+
+  saveData(data);
+
+  res.json(users[index]);
+});
+
+
+// ----- START SERVER -----
+
 app.listen(PORT, () => {
-  console.log(`Express server running at http://localhost:${PORT}`);
+  console.log(`✅ Express server running at http://localhost:${PORT}`);
 });

@@ -24,19 +24,22 @@ const Login = () => {
     let validationErrors = {};
 
     axios
-      .post("http://localhost:5000/login", {
+      .post("http://localhost:3001/login", {
         name: formData.name,
         password: formData.password,
       })
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        alert("Login successful!");
+        localStorage.setItem(
+          "loggedInUser",
+          JSON.stringify(response.data.user)
+        );
         login(response.data.user);
+        alert("Login successful!");
         navigate("/");
       })
       .catch((err) => {
         setErrors({ login: "Invalid credentials" });
+        setValid(false);
       });
   };
 
@@ -49,6 +52,7 @@ const Login = () => {
             type="text"
             id="loginName"
             className="form-control"
+            value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
           <label className="form-label" htmlFor="loginName">
@@ -61,6 +65,7 @@ const Login = () => {
             type="password"
             id="loginPassword"
             className="form-control"
+            value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
@@ -93,7 +98,11 @@ const Login = () => {
         </div>
 
         {/* Submit button */}
-        <button type="submit" className="btn btn-block mb-4" style={{ backgroundColor: "#E79B72"}}>
+        <button
+          type="submit"
+          className="btn btn-block mb-4"
+          style={{ backgroundColor: "#E79B72" }}
+        >
           Sign in
         </button>
 

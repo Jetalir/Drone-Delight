@@ -6,14 +6,18 @@ import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import App from './App';
 import './index.css';
 
+function CartProviderWrapper() {
+  const { user } = useAuth();
+  return <CartProvider userId={user ? user.id : null}><App /></CartProvider>;
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-        <AuthProvider>
-            <App />
-        </AuthProvider>
+      <AuthProvider>
+        <CartProviderWrapper />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

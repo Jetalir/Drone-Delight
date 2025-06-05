@@ -13,9 +13,9 @@ function Checkout() {
   const { removeFromCart, updateQuantity, getCartItems, clearCart } = useCart();
   const fullCartItems = useFullCartItems();
   const { user } = useAuth();
+
   const [cardError, setCardError] = useState("");
   const [swishError, setSwishError] = useState("");
-
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [swishNumber, setSwishNumber] = useState("");
   const [cardInfo, setCardInfo] = useState({
@@ -25,9 +25,40 @@ function Checkout() {
     cvv: "",
   });
 
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    address: "",
+    city: "",
+    postalCode: "",
+  });
+  const [deliveryErrors, setDeliveryErrors] = useState({
+    name: false,
+    address: false,
+    city: false,
+    postalCode: false,
+  });
+
+  const totalPrice = fullCartItems.reduce(
+    (sum, item) => sum + (item.price || 0) * item.quantity,
+    0
+  );
+  const deliveryFee = 30;
+  const totalWithDelivery = totalPrice + deliveryFee;
+
   const handleCheckout = async () => {
     setCardError("");
     setSwishError("");
+
+    const newErrors = {
+      name: !userDetails.name.trim(),
+      address: !userDetails.address.trim(),
+      city: !userDetails.city.trim(),
+      postalCode: !userDetails.postalCode.trim(),
+    };
+    setDeliveryErrors(newErrors);
+
+    const hasDeliveryError = Object.values(newErrors).some(Boolean);
+    if (hasDeliveryError) return;
 
     if (paymentMethod === "credit") {
       const { name, number, expiry, cvv } = cardInfo;
@@ -52,12 +83,14 @@ function Checkout() {
       const items = await getCartItems();
       if (items.length === 0) return;
 
-      const orderItems = fullCartItems.map(({ menuItemId, name, quantity, price }) => ({
-        menuItemId,
-        name,
-        quantity,
-        price,
-      }));
+      const orderItems = fullCartItems.map(
+        ({ menuItemId, name, quantity, price }) => ({
+          menuItemId,
+          name,
+          quantity,
+          price,
+        })
+      );
 
       const total = fullCartItems.reduce(
         (sum, item) => sum + (item.price || 0) * item.quantity,
@@ -72,7 +105,11 @@ function Checkout() {
         })),
         total,
         date: new Date().toISOString().split("T")[0],
-        paymentMethod,
+        paymentMethod: paymentMethod === "credit" ? "Credit Card" : "Swish",
+        name: userDetails.name,
+        address: userDetails.address,
+        city: userDetails.city,
+        postalCode: userDetails.postalCode,
       });
 
       const savedOrder = response.data;
@@ -85,19 +122,16 @@ function Checkout() {
           items: orderItems,
           total,
           paymentMethod,
+          name: userDetails.name,
+          address: userDetails.address,
+          city: userDetails.city,
+          postalCode: userDetails.postalCode,
         },
       });
     } catch (err) {
       console.error("Checkout error:", err);
     }
   };
-
-  const totalPrice = fullCartItems.reduce(
-    (sum, item) => sum + (item.price || 0) * item.quantity,
-    0
-  );
-  const deliveryFee = 30;
-  const totalWithDelivery = totalPrice + deliveryFee;
 
   return (
     <section className="checkout-section">
@@ -181,6 +215,41 @@ function Checkout() {
               </table>
             </div>
 
+            <div className="user-details-form">
+              <h3>Delivery Information</h3>
+              <div className="form-grid">
+                {["name", "address", "city", "postalCode"].map((field) => (
+                  <div
+                    key={field}
+                    className={`form-group ${
+                      deliveryErrors[field] ? "error" : ""
+                    }`}
+                  >
+                    <label>
+                      {field === "postalCode"
+                        ? "Postal Code"
+                        : field.charAt(0).toUpperCase() + field.slice(1)}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={
+                        field === "postalCode"
+                          ? "Postal Code"
+                          : field.charAt(0).toUpperCase() + field.slice(1)
+                      }
+                      value={userDetails[field]}
+                      onChange={(e) =>
+                        setUserDetails({
+                          ...userDetails,
+                          [field]: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="payment-card">
               <div className="payment-content">
                 <div className="payment-methods">
@@ -197,14 +266,13 @@ function Checkout() {
                         <i className="fab fa-cc-mastercard"></i> Credit Card
                       </span>
                     </label>
-
                     <label className="radio-option">
                       <input
                         type="radio"
                         name="payment"
                         value="swish"
-                        checked={paymentMethod === "swish"}
-                        onChange={() => setPaymentMethod("swish")}
+                        checked={paymentMethod === "Swish"}
+                        onChange={() => setPaymentMethod("Swish")}
                       />
                       <span>
                         <img
@@ -236,7 +304,6 @@ function Checkout() {
                         />
                         <label>Name on card</label>
                       </div>
-
                       <div
                         className={`form-group ${
                           cardError && !cardInfo.number.match(/^\d{13,19}$/)
@@ -254,7 +321,6 @@ function Checkout() {
                         />
                         <label>Card Number</label>
                       </div>
-
                       <div
                         className={`form-group ${
                           cardError && !cardInfo.expiry ? "error" : ""
@@ -270,7 +336,6 @@ function Checkout() {
                         />
                         <label>Expiration</label>
                       </div>
-
                       <div
                         className={`form-group ${
                           cardError && !cardInfo.cvv.match(/^\d{3}$/)
@@ -288,35 +353,32 @@ function Checkout() {
                         />
                         <label>CVV</label>
                       </div>
-
                       {cardError && (
                         <div
-                          style={{ gridColumn: "1 / -1" }}
                           className="error-text"
+                          style={{ gridColumn: "1 / -1" }}
                         >
                           {cardError}
                         </div>
                       )}
                     </>
                   ) : (
-                    <>
-                      <div
-                        className={`form-group ${swishError ? "error" : ""}`}
-                        style={{ gridColumn: "1 / -1" }}
-                      >
-                        <input
-                          type="tel"
-                          pattern="^(\+46|0)7\d{8}$"
-                          placeholder="+46"
-                          value={swishNumber}
-                          onChange={(e) => setSwishNumber(e.target.value)}
-                        />
-                        <label>Phone Number</label>
-                        {swishError && (
-                          <div className="error-text">{swishError}</div>
-                        )}
-                      </div>
-                    </>
+                    <div
+                      className={`form-group ${swishError ? "error" : ""}`}
+                      style={{ gridColumn: "1 / -1" }}
+                    >
+                      <input
+                        type="tel"
+                        pattern="^(\+46|0)7\d{8}$"
+                        placeholder="+46"
+                        value={swishNumber}
+                        onChange={(e) => setSwishNumber(e.target.value)}
+                      />
+                      <label>Phone Number</label>
+                      {swishError && (
+                        <div className="error-text">{swishError}</div>
+                      )}
+                    </div>
                   )}
                 </div>
 

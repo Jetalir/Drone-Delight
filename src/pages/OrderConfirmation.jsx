@@ -10,16 +10,40 @@ function OrderConfirmation() {
     return null;
   }
 
-  const { orderId, date, items, total, paymentMethod } = location.state;
+  const {
+    orderId,
+    date,
+    items,
+    total,
+    paymentMethod,
+    name,
+    address,
+    city,
+    postalCode,
+  } = location.state;
 
   return (
     <section className="order-confirmation">
       <div className="container">
         <h1>Thank you for your order!</h1>
 
-        {orderId && <p>Order Number: <strong>{orderId}</strong></p>}
+        {orderId && (
+          <p>
+            Order Number: <strong>{orderId}</strong>
+          </p>
+        )}
         <p>Date: {date}</p>
-        <p>Payment Method: {paymentMethod === "credit" ? "Credit Card" : "Swish"}</p>
+        <p>
+          Payment Method: {paymentMethod === "credit" ? "Credit Card" : "Swish"}
+        </p>
+
+        <h2>Delivery Information</h2>
+        <p>
+          <strong>Name:</strong> {name}
+        </p>
+        <p>
+          <strong>Address:</strong> {address}, {city}, {postalCode}
+        </p>
 
         <h2>Order Summary</h2>
         <table className="order-summary-table">
@@ -43,7 +67,12 @@ function OrderConfirmation() {
 
         <h3>Total Paid: {total} SEK</h3>
 
-        <button onClick={() => navigate("/")}>Back to Home</button>
+        <button
+          className="order-confirmation__btn"
+          onClick={() => navigate("/")}
+        >
+          Back to Home
+        </button>
       </div>
     </section>
   );

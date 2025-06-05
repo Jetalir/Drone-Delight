@@ -42,34 +42,26 @@ export default function OrderHistory() {
   return (
     <div className="container order-history">
       <h1>Your Order History</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Date</th>
-            <th>Items</th>
-            <th>Total</th>
-            <th>Payment Method</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.date}</td>
-              <td>
-                {order.items.map(({ menuItemId, quantity }) => (
-                  <div key={menuItemId}>
-                    {getItemName(menuItemId)} x {quantity}
-                  </div>
-                ))}
-              </td>
-              <td>{order.total} SEK</td>
-              <td>{order.paymentMethod}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="order-cards">
+        {orders.map((order) => (
+          <div key={order.id} className="order-card">
+            <p><span className="label">Order ID:</span> {order.id}</p>
+            <p><span className="label">Date:</span> {order.date}</p>
+            <p><span className="label">Items:</span></p>
+            <ul>
+              {order.items.map(({ menuItemId, quantity }) => (
+                <li key={menuItemId}>
+                  {getItemName(menuItemId)} x {quantity}
+                </li>
+              ))}
+            </ul>
+            <p><span className="label">Total:</span> {order.total} SEK</p>
+            <p><span className="label">Payment Method:</span> {order.paymentMethod}</p>
+            <p><span className="label">Name:</span> {order.name}</p>
+            <p><span className="label">Delivery Address:</span> {order.address}, {order.city} {order.postalCode}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

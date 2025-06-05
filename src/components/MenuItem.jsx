@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Menu.css"; 
+import "../styles/Menu.css";
 
 function MenuItem({ name, description, price, tags, image }) {
   const [imgSrc, setImgSrc] = useState(null);
